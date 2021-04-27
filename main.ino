@@ -154,8 +154,9 @@ void loop(){
 
         digitalWrite(ledGeneral, HIGH);
         
-        if (digitalRead(interruptor) == HIGH) {
-            lcd.clear();
+        if (digitalRead(interruptor) == HIGH && with_caps == false) {
+            main_options = false;
+          	lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Atencao!");
             lcd.setCursor(0, 1);
@@ -164,32 +165,41 @@ void loop(){
             delay(3000);
 
             opened = true;
-            to_close = true;
-            main_options = false;
         }
         
-        if (to_close == true && opened == true) {
+        if (opened == true && with_caps == false) {
             with_caps = true;
-            opened = false;
+          
+          	lcd.clear();
 
             lcd.setCursor(0, 0);
             lcd.print("Atencao");
             lcd.setCursor(0, 1);
             lcd.print("Caps. no lugar");
 
-            delay(1000);
-
-            main_options = true;
-            to_close = false;
+            delay(2000);
+        }
+      
+        if (opened == true && with_caps == true) {
+        	lcd.clear();
+          	lcd.setCursor(0, 0);
+            lcd.print("Atencao");
+            lcd.setCursor(0, 1);
+            lcd.print("Fechar comp.");
+          	delay(2000);
+        }
+      
+      	if (digitalRead(interruptor) == LOW && with_caps == true && (save_b1_state_button == LOW || save_b2_state_button == LOW)) {
+        	main_options = true;
+          	opened = false;
         }
         
         if (main_options == true) {
-            lcd.setCursor(0, 0);
+          	lcd.setCursor(0, 0);
             lcd.print("Maquina de Cafe!");
-            lcd.setCursor(0, 1);
-            lcd.print("1- Curto 2- Longo");
+          	lcd.setCursor(0, 1);
+          	lcd.print("1-Curto 2-Longo");
         }
-        
         
     
         if ((!b1_state) && (b1_previous_state)) { 
@@ -207,13 +217,21 @@ void loop(){
             save_b1_state_button = !save_b1_state_button;
             
             measureTemperature();
+          
+          	with_caps = false;
 
         } else if ((with_caps == false && save_b1_state_button == HIGH)) {
             lcd.clear();
+
+          	main_options = false;
+          	
             lcd.setCursor(0, 0);
             lcd.print("Colocar caps");
-            delay(1000);
+            delay(2000);
+          	b1_previous_state = b1_state;
             save_b1_state_button = !save_b1_state_button;
+          	
+          	main_options = true;
         }
         
         if (with_caps == true && save_b2_state_button == HIGH) {
@@ -223,13 +241,18 @@ void loop(){
             save_b2_state_button = !save_b2_state_button;
             
             measureTemperature();
+          
+          	with_caps = false;
 
         } else if ((with_caps == false && save_b2_state_button == HIGH)) {
-            lcd.clear();
+            main_options = false;
+          	lcd.clear();
             lcd.setCursor(0, 0);
             lcd.print("Colocar caps");
-            delay(1000);
+            delay(2000);
+          	b2_previous_state = b2_state;
             save_b2_state_button = !save_b2_state_button;
+          	main_options = true;
         }
     
     } else {
