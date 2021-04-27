@@ -226,7 +226,9 @@ void loop(){
           	main_options = false;
           	
             lcd.setCursor(0, 0);
-            lcd.print("Colocar caps");
+            lcd.print("Colocar");
+          	lcd.setCursor(0, 1);
+          	lcd.print("Capsula");
             delay(2000);
           	b1_previous_state = b1_state;
             save_b1_state_button = !save_b1_state_button;
@@ -248,7 +250,9 @@ void loop(){
             main_options = false;
           	lcd.clear();
             lcd.setCursor(0, 0);
-            lcd.print("Colocar caps");
+            lcd.print("Colocar");
+          	lcd.setCursor(0, 1);
+          	lcd.print("Capsula");
             delay(2000);
           	b2_previous_state = b2_state;
             save_b2_state_button = !save_b2_state_button;
