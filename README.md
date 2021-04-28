@@ -18,8 +18,5 @@
 8. Placa de Ensaio
 9. Arduíno UNO R3
 
-### Fluxograma do sistema
-<a href="https://miro.com/app/board/o9J_lHGnrdQ=/">Fluxo</a>
-
 ### Link para o simulador
 <a href="https://www.tinkercad.com/things/ckwEcjexgrB-maquina-de-cafe">Tinkercad</a>
